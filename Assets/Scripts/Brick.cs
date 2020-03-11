@@ -1,18 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float Score = 100;
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (collision.collider.gameObject.tag == "Ball")
+        {
+            Destroy(gameObject);
+        }
     }
 }

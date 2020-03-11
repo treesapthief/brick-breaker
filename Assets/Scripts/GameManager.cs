@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public event OnStateChangeHandler OnStateChange;
     public GameState GameState { get; private set; }
     public ScoreManager ScoreManager { get; private set; }
+    public LevelManager LevelManager { get; private set; }
+
 
     private static GameManager _instance = null;
 
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ScoreManager = GetComponent<ScoreManager>();
+        LevelManager = GetComponent<LevelManager>();
+        LevelManager.BuildLevel();
     }
 
     private void Update()
