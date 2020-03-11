@@ -24,21 +24,21 @@ public class GameManager : MonoBehaviour
 
     protected GameManager()
     {
-        GameState = GameState.WaitForStart;
+        GameState = GameState.NewGame;
     }
 
     private void Start()
     {
         ScoreManager = GetComponent<ScoreManager>();
         LevelManager = GetComponent<LevelManager>();
-        LevelManager.BuildLevel();
+        LevelManager.BuildLevel(1);
     }
 
     private void Update()
     {
         if (GameState == GameState.NewGame && Input.anyKeyDown)
         {
-            SetGameState(GameState.InGame);
+            SetGameState(GameState.WaitForStart);
         }
         else if (GameState == GameState.WaitForStart && Input.anyKeyDown)
         {
