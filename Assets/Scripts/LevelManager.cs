@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
         if (_brickCount <= 0)
         {
             _brickCount = 0;
-            GameManager.Instance.SetGameState(GameState.GameOver);
+            GameManager.Instance.SetGameState(GameState.LevelComplete);
         }
     }
 }

@@ -6,7 +6,8 @@ public enum GameState
     WaitForStart,
     InGame,
     Paused,
-    GameOver
+    GameOver,
+    LevelComplete
 }
 
 public delegate void OnStateChangeHandler(GameState newState);
