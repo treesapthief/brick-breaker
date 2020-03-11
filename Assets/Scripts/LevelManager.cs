@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public int BrickWidth = 4;
     public int BrickHeight = 2;
     private static LevelManager _instance = null;
+    private int _brickCount = 0;
 
     public LevelManager()
     {
@@ -35,7 +36,18 @@ public class LevelManager : MonoBehaviour
             {
                 var position = new Vector3(w + Offset.x, h + Offset.y);
                 Instantiate(BrickTemplate, position, Quaternion.identity);
+                _brickCount++;
             }
+        }
+    }
+
+    public void RemoveBricks(int count)
+    {
+        _brickCount -= count;
+        if (_brickCount <= 0)
+        {
+            _brickCount = 0;
+            GameManager.Instance.SetGameState(GameState.GameOver);
         }
     }
 }
