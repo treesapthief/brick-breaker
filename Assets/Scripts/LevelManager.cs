@@ -10,14 +10,13 @@ public class LevelManager : MonoBehaviour
     public int LevelHeight = 24;
     public int BrickWidth = 4;
     public int BrickHeight = 2;
+    public int MaxBricks = 120;
     private static LevelManager _instance = null;
     private int _brickCount = 0;
     private int _currentLevel = 1;
 
     public LevelManager()
     {
-        GameManager.Instance.OnStateChange += LevelCompleted;
-        LevelText.text = $"Level {_currentLevel}";
     }
 
     public static LevelManager Instance
@@ -33,15 +32,31 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        GameManager.Instance.OnStateChange += LevelCompleted;
+    }
+
     public void BuildLevel(int level)
     {
         LevelText.text = $"Level {_currentLevel}";
+        _brickCount = 0;
         for (var w = 0; w < LevelWidth; w+=BrickWidth) {
             for (var h = 0; h < LevelHeight; h+=BrickHeight)
             {
                 var position = new Vector3(w + Offset.x, h + Offset.y);
                 Instantiate(BrickTemplate, position, Quaternion.identity);
                 _brickCount++;
+
+                if (_brickCount >= MaxBricks)
+                {
+                    break;
+                }
+            }
+
+            if (_brickCount >= MaxBricks)
+            {
+                break;
             }
         }
 
@@ -57,11 +72,15 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.SetGameState(GameState.LevelComplete);
         }
     }
+
+
+
     private void LevelCompleted(GameState newState)
     {
         if (newState == GameState.LevelComplete)
         {
             _currentLevel++;
+            LevelText.text = $"Level {_currentLevel}";
             BuildLevel(_currentLevel);
             // TODO: Load the next level
             // BUG: Will this race for condition in the other events?
