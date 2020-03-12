@@ -8,9 +8,8 @@ public class Brick : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "Ball")
         {
-            var gameManager = GameManager.Instance;
-            gameManager.ScoreManager.GivePoints(Score);
-            gameManager.LevelManager.RemoveBricks(1);
+            ScoreManager.Instance.GivePoints(Score);
+            LevelManager.Instance.RemoveBricks(1);
             Destroy(gameObject);
         }
     }

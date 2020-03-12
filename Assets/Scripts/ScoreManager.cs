@@ -10,16 +10,6 @@ public class ScoreManager : MonoBehaviour
 
     protected ScoreManager()
     {
-        GameManager.Instance.OnStateChange += LevelCompleted;
-    }
-
-    private void LevelCompleted(GameState newState)
-    {
-        if (newState == GameState.LevelComplete)
-        {
-            // TODO: Save points?
-            // TODO: Calculate bonuses for extra life?
-        }
     }
 
     public static ScoreManager Instance
