@@ -35,12 +35,11 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.OnStateChange += LevelCompleted;
-        BuildLevel(1);
     }
 
     public void BuildLevel(int level)
     {
-        LevelText.text = $"Level {level}";
+        LevelText.text = $"Level {_currentLevel}";
         _brickCount = 0;
         for (var w = 0; w < LevelWidth; w+=BrickWidth) {
             for (var h = 0; h < LevelHeight; h+=BrickHeight)

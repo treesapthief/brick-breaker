@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
         ScoreManager = GetComponent<ScoreManager>();
         LevelManager = GetComponent<LevelManager>();
-//        LevelManager.Instance.BuildLevel(1);
+        LevelManager.BuildLevel(1);
     }
 
     private void Update()
