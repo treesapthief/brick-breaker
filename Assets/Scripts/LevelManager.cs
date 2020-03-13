@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Text.RegularExpressions;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -72,9 +73,7 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.SetGameState(GameState.LevelComplete);
         }
     }
-
-
-
+    
     private void LevelCompleted(GameState newState)
     {
         if (newState == GameState.LevelComplete)
@@ -85,5 +84,25 @@ public class LevelManager : MonoBehaviour
             // TODO: Load the next level
             // BUG: Will this race for condition in the other events?
         }
+    }
+
+    private string[][] GetLevel(int level)
+    {
+        //https://answers.unity.com/questions/577889/create-level-based-on-xmltxt-file.html
+        const string filePath = "D:\\Programming\\repo\\Unity Projects\\Brick Breaker\\Assets\\Levels";
+        const string fileBaseName = "level";
+        const string fileExtension = "txt";
+        var text = System.IO.File.ReadAllText($"{filePath}/{fileBaseName}_{level}.{fileExtension}");
+        var lines = Regex.Split(text, "\r\n");
+        var rows = lines.Length;
+
+        var levelBase = new string[rows][];
+        for (var i = 0; i < lines.Length; i++)
+        {
+            var stringsOfLine = Regex.Split(lines[i], " ");
+            levelBase[i] = stringsOfLine;
+        }
+
+        return levelBase;
     }
 }
