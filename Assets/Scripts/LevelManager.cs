@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +10,8 @@ public class LevelManager : MonoBehaviour
     public GameObject BrickTemplate;
     public Text LevelText;
     public Vector3 Offset;
-    public int LevelWidth = 45;
-    public int LevelHeight = 24;
+    public int MaxLevelWidth = 45;
+    public int MaxLevelHeight = 24;
     public int BrickWidth = 4;
     public int BrickHeight = 2;
     public int MaxBricks = 120;
@@ -42,10 +45,27 @@ public class LevelManager : MonoBehaviour
     {
         LevelText.text = $"Level {_currentLevel}";
         _brickCount = 0;
-        for (var w = 0; w < LevelWidth; w+=BrickWidth) {
-            for (var h = 0; h < LevelHeight; h+=BrickHeight)
+        var levelData = GetLevel(level);
+
+        // TODO: Validate level size (must be > 0 but equal or smaller to the Max Height/Width
+
+        if (!CheckIfValidLevelData(levelData))
+        {
+            Debug.Log("Invalid level data");
+            return;
+        }
+
+        for (var h = 0; h < Math.Min(levelData.Length, MaxLevelHeight); h++) {
+            for (var w = 0; w < Math.Min(levelData[h].Length, MaxLevelWidth); w++)
             {
-                var position = new Vector3(w + Offset.x, h + Offset.y);
+                if (levelData[h][w] == "0")
+                {
+                    continue;
+                }
+
+                // TODO: Non-zero values will eventually have new distinction (different color bricks, points, etc)
+
+                var position = new Vector3(w + Offset.x, Offset.y - h);
                 Instantiate(BrickTemplate, position, Quaternion.identity);
                 _brickCount++;
 
@@ -62,6 +82,58 @@ public class LevelManager : MonoBehaviour
         }
 
         GameManager.Instance.SetGameState(GameState.WaitForStart);
+    }
+
+    private bool CheckIfValidLevelData(string[][] levelData)
+    {
+        if (levelData == null)
+        {
+            Debug.Log("Level data is null.");
+            return false;
+        }
+
+        if (levelData.Length == 0)
+        {
+            Debug.Log("Level data (first array) is empty.");
+            return false;
+        }
+
+        if (levelData.Length > MaxLevelHeight)
+        {
+            Debug.Log($"Level data is too large. Must be a max of {MaxLevelHeight} rows");
+            return false;
+        }
+
+        for (var h = 0; h < levelData.Length; h++)
+        {
+            var levelRow = levelData[h];
+            for (var w = 0; w < levelRow.Length; w++)
+            {
+                if (levelRow.Length == 0)
+                {
+                    Debug.Log($"Level data row {w} is empty.");
+                }
+                else if (levelRow.Length > MaxLevelWidth)
+                {
+                    Debug.Log($"Level data row {w} has {levelRow.Length} rows. Max is {MaxLevelWidth}");
+                    return false;
+                }
+            }
+        }
+
+        if (levelData.Any(levelRow => levelRow.Length == 0))
+        {
+            Debug.Log("Level data has empty rows.");
+            return false;
+        }
+
+        if (levelData.Any(levelRow => levelRow.Length > MaxLevelWidth))
+        {
+            Debug.Log($"Level data is too large. Must be a max of {MaxLevelWidth} columns");
+            return false;
+        }
+
+        return true;
     }
 
     public void RemoveBricks(int count)
@@ -86,20 +158,31 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private string[][] GetLevel(int level)
+    private string GetFileNameForLevel(int level)
     {
-        //https://answers.unity.com/questions/577889/create-level-based-on-xmltxt-file.html
         const string filePath = "D:\\Programming\\repo\\Unity Projects\\Brick Breaker\\Assets\\Levels";
         const string fileBaseName = "level";
         const string fileExtension = "txt";
-        var text = System.IO.File.ReadAllText($"{filePath}/{fileBaseName}_{level}.{fileExtension}");
+        return $"{filePath}/{fileBaseName}_{level}.{fileExtension}";
+    }
+
+    private string[][] GetLevel(int level)
+    {
+        //https://answers.unity.com/questions/577889/create-level-based-on-xmltxt-file.html
+        var fullFileName = GetFileNameForLevel(level);
+        if (!System.IO.File.Exists(fullFileName))
+        {
+            return null;
+        }
+
+        var text = System.IO.File.ReadAllText(fullFileName);
         var lines = Regex.Split(text, "\r\n");
         var rows = lines.Length;
 
         var levelBase = new string[rows][];
         for (var i = 0; i < lines.Length; i++)
         {
-            var stringsOfLine = Regex.Split(lines[i], " ");
+            var stringsOfLine = lines[i].Select(c => c.ToString()).ToArray();
             levelBase[i] = stringsOfLine;
         }
 

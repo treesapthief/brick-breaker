@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.015856236, y: 0.82161593}
   m_AnchorMax: {x: 0.29688585, y: 1}
-  m_AnchoredPosition: {x: 1.6000061, y: 0.80000305}
+  m_AnchoredPosition: {x: 1.5999756, y: 0.7999878}
   m_SizeDelta: {x: 3.1000004, y: -2.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &113194290
@@ -631,7 +631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37288585, y: 0.82161593}
   m_AnchorMax: {x: 0.63322836, y: 1}
-  m_AnchoredPosition: {x: -0.000015258789, y: -0.80003357}
+  m_AnchoredPosition: {x: -0.000015258789, y: -0.8000488}
   m_SizeDelta: {x: 8.100006, y: -1.6000061}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1098822154
@@ -734,12 +734,12 @@ MonoBehaviour:
   BrickTemplate: {fileID: 7563375118456347093, guid: f70dff2444be529409f2098f0addc590,
     type: 3}
   LevelText: {fileID: 113194290}
-  Offset: {x: -22, y: -9, z: 0}
-  LevelWidth: 45
-  LevelHeight: 24
+  Offset: {x: -22, y: 14, z: 0}
+  MaxLevelWidth: 45
+  MaxLevelHeight: 24
   BrickWidth: 4
   BrickHeight: 2
-  MaxBricks: 4
+  MaxBricks: 120
 --- !u!114 &1105652196
 MonoBehaviour:
   m_ObjectHideFlags: 0
