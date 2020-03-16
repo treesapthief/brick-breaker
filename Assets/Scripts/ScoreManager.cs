@@ -10,6 +10,10 @@ public class ScoreManager : MonoBehaviour
 
     protected ScoreManager()
     {
+    }
+
+    private void Start()
+    {
         GameManager.Instance.OnStateChange += LevelCompleted;
     }
 
@@ -26,10 +30,10 @@ public class ScoreManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = new ScoreManager();
-            }
+            //if (_instance == null)
+            //{
+            //    _instance = new ScoreManager();
+            //}
 
             return _instance;
         }
