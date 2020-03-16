@@ -55,10 +55,10 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = new GameManager();
-            }
+            //if (_instance == null)
+            //{
+            //    _instance = new GameManager();
+            //}
 
             return _instance;
         }

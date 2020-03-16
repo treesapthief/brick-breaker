@@ -24,10 +24,10 @@ public class LevelManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = new LevelManager();
-            }
+            //if (_instance == null)
+            //{
+            //    _instance = new LevelManager();
+            //}
 
             return _instance;
         }
