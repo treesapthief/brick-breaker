@@ -740,6 +740,7 @@ MonoBehaviour:
   BrickWidth: 4
   BrickHeight: 2
   MaxBricks: 120
+  NumberOfLevels: 4
 --- !u!114 &1105652196
 MonoBehaviour:
   m_ObjectHideFlags: 0

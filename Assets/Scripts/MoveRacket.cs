@@ -3,7 +3,9 @@
 public class MoveRacket : MonoBehaviour
 {
     public float Speed = 30;
+    public float QuickSpeedMultiplier = 2;
     public string Axis = "Horizontal";
+    public string QuickSpeedButton = "QuickSpeed";
     public Vector2 StartingPosition;
 
     private Rigidbody2D _rigidBody2D;
@@ -36,7 +38,8 @@ public class MoveRacket : MonoBehaviour
         }
 
         var horizontalAxis = Input.GetAxisRaw(Axis);
-        _rigidBody2D.velocity = new Vector2(horizontalAxis, 0) * Speed;
+        var quickSpeedEnabled = Input.GetButton(QuickSpeedButton);
+        _rigidBody2D.velocity = new Vector2(horizontalAxis, 0) * Speed * (quickSpeedEnabled ? QuickSpeedMultiplier : 1);
     }
 
     private static bool DisallowMovement()

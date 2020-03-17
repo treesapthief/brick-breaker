@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     public int BrickWidth = 4;
     public int BrickHeight = 2;
     public int MaxBricks = 120;
+    public int NumberOfLevels = 1;
     private static LevelManager _instance = null;
     private int _brickCount = 0;
     private int _currentLevel = 1;
@@ -151,6 +152,11 @@ public class LevelManager : MonoBehaviour
         if (newState == GameState.LevelComplete)
         {
             _currentLevel++;
+            if (_currentLevel > NumberOfLevels)
+            {
+                _currentLevel = NumberOfLevels;
+            }
+
             LevelText.text = $"Level {_currentLevel}";
             BuildLevel(_currentLevel);
             // TODO: Load the next level
