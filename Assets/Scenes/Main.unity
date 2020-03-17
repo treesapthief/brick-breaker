@@ -735,7 +735,7 @@ MonoBehaviour:
     type: 3}
   LevelText: {fileID: 113194290}
   Offset: {x: -22, y: 14, z: 0}
-  MaxLevelWidth: 45
+  MaxLevelWidth: 48
   MaxLevelHeight: 24
   BrickWidth: 4
   BrickHeight: 2
@@ -1043,7 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 30
-  StartingPosition: {x: 0, y: 0}
+  StartingPosition: {x: 0, y: -12}
 --- !u!1 &1433695003
 GameObject:
   m_ObjectHideFlags: 0

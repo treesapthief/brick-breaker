@@ -160,23 +160,21 @@ public class LevelManager : MonoBehaviour
 
     private string GetFileNameForLevel(int level)
     {
-        const string filePath = "D:\\Programming\\repo\\Unity Projects\\Brick Breaker\\Assets\\Levels";
         const string fileBaseName = "level";
-        const string fileExtension = "txt";
-        return $"{filePath}/{fileBaseName}_{level}.{fileExtension}";
+        return $"Levels/{fileBaseName}_{level}";
     }
 
     private string[][] GetLevel(int level)
     {
-        //https://answers.unity.com/questions/577889/create-level-based-on-xmltxt-file.html
         var fullFileName = GetFileNameForLevel(level);
-        if (!System.IO.File.Exists(fullFileName))
+        var textAsset = Resources.Load<TextAsset>(fullFileName);
+        if (textAsset == null)
         {
             return null;
         }
 
-        var text = System.IO.File.ReadAllText(fullFileName);
-        var lines = Regex.Split(text, "\r\n");
+        var text = textAsset.text;
+        var lines = Regex.Split(text, "\n");
         var rows = lines.Length;
 
         var levelBase = new string[rows][];
