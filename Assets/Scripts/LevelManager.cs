@@ -59,15 +59,41 @@ public class LevelManager : MonoBehaviour
         for (var h = 0; h < Math.Min(levelData.Length, MaxLevelHeight); h++) {
             for (var w = 0; w < Math.Min(levelData[h].Length, MaxLevelWidth); w++)
             {
-                if (levelData[h][w] == "0")
+                var tile = levelData[h][w];
+                if (tile == "0")
                 {
                     continue;
                 }
-
-                // TODO: Non-zero values will eventually have new distinction (different color bricks, points, etc)
+                var hitPoints = 1;
+                var color = Color.white;
+                switch (tile)
+                {
+                    case "1":
+                        hitPoints = 1;
+                        break;
+                    case "2":
+                        hitPoints = 2;
+                        color = Color.red;
+                        break;
+                    case "3":
+                        hitPoints = 3;
+                        color = Color.yellow;
+                        break;
+                    case "4":
+                        hitPoints = 4;
+                        color = Color.green;
+                        break;
+                }
 
                 var position = new Vector3(w + Offset.x, Offset.y - h);
-                Instantiate(BrickTemplate, position, Quaternion.identity);
+                var brickObject = Instantiate(BrickTemplate, position, Quaternion.identity);
+                var brick = brickObject.GetComponent<Brick>();
+                if (brick != null)
+                {
+                    brick.InitializeHealth(hitPoints);
+                    brick.SetColor(color);
+                }
+
                 _brickCount++;
 
                 if (_brickCount >= MaxBricks)
