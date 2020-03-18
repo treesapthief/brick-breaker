@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameState GameState { get; private set; }
     public ScoreManager ScoreManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
-
+    public LivesManager LivesManager { get; private set; }
 
     private static GameManager _instance = null;
 
@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         ScoreManager = GetComponent<ScoreManager>();
         LevelManager = GetComponent<LevelManager>();
+        LivesManager = GetComponent<LivesManager>();
         LevelManager.BuildLevel(1);
     }
 

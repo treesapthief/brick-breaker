@@ -686,6 +686,7 @@ GameObject:
   - component: {fileID: 1105652193}
   - component: {fileID: 1105652196}
   - component: {fileID: 1105652195}
+  - component: {fileID: 1105652197}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -737,8 +738,6 @@ MonoBehaviour:
   Offset: {x: -22, y: 14, z: 0}
   MaxLevelWidth: 48
   MaxLevelHeight: 24
-  BrickWidth: 4
-  BrickHeight: 2
   MaxBricks: 120
   NumberOfLevels: 4
 --- !u!114 &1105652196
@@ -754,6 +753,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerScoreText: {fileID: 1098822152}
+--- !u!114 &1105652197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105652192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e76ce98e793d4c25bc3d1d8592269f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingLives: 3
+  MaxLives: 9
 --- !u!1 &1150204303
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,7 +864,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 30
+  QuickSpeedMultiplier: 2
   Axis: Horizontal
+  QuickSpeedButton: QuickSpeed
   StartingPosition: {x: 0, y: -14}
 --- !u!50 &1150204307
 Rigidbody2D:
@@ -1056,6 +1071,7 @@ GameObject:
   - component: {fileID: 1433695005}
   - component: {fileID: 1433695004}
   - component: {fileID: 1433695006}
+  - component: {fileID: 1433695007}
   m_Layer: 0
   m_Name: WallBottom
   m_TagString: Untagged
@@ -1153,6 +1169,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 50, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1433695007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433695003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8e3d9e06af2b4fb1be8a0e1608e40b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1461153910
 GameObject:
   m_ObjectHideFlags: 0

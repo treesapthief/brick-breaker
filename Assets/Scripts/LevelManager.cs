@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,11 +10,8 @@ public class LevelManager : MonoBehaviour
     public Vector3 Offset;
     public int MaxLevelWidth = 45;
     public int MaxLevelHeight = 24;
-    public int BrickWidth = 4;
-    public int BrickHeight = 2;
     public int MaxBricks = 120;
     public int NumberOfLevels = 1;
-    private static LevelManager _instance = null;
     private int _brickCount = 0;
     private int _currentLevel = 1;
 
@@ -24,18 +19,7 @@ public class LevelManager : MonoBehaviour
     {
     }
 
-    public static LevelManager Instance
-    {
-        get
-        {
-            //if (_instance == null)
-            //{
-            //    _instance = new LevelManager();
-            //}
-
-            return _instance;
-        }
-    }
+    public static LevelManager Instance { get; } = null;
 
     private void Awake()
     {
@@ -47,9 +31,7 @@ public class LevelManager : MonoBehaviour
         LevelText.text = $"Level {_currentLevel}";
         _brickCount = 0;
         var levelData = GetLevel(level);
-
-        // TODO: Validate level size (must be > 0 but equal or smaller to the Max Height/Width
-
+        
         if (!CheckIfValidLevelData(levelData))
         {
             Debug.Log("Invalid level data");
@@ -206,7 +188,7 @@ public class LevelManager : MonoBehaviour
         }
 
         var text = textAsset.text;
-        var lines = Regex.Split(text, "\n");
+        var lines = text.Split(new [] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
         var rows = lines.Length;
 
         var levelBase = new string[rows][];
