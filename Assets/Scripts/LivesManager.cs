@@ -1,15 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class LivesManager : MonoBehaviour
 {
     public int StartingLives = 3;
     public int MaxLives = 9;
+    public Text LivesText;
 
     private int _currentLives;
+
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
         _currentLives = StartingLives;
+        SetText(_currentLives);
     }
 
     internal void TakeLives(int numberOfLives)
@@ -20,6 +28,8 @@ public class LivesManager : MonoBehaviour
             _currentLives = 0;
             GameManager.Instance.SetGameState(GameState.GameOver);
         }
+
+        SetText(_currentLives);
     }
 
     internal void AddLives(int numberOfLives)
@@ -29,5 +39,12 @@ public class LivesManager : MonoBehaviour
         {
             _currentLives = MaxLives;
         }
+
+        SetText(_currentLives);
+    }
+
+    private void SetText(int lives)
+    {
+        LivesText.text = $"Lives {lives}";
     }
 }

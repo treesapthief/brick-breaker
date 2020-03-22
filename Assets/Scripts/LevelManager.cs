@@ -26,6 +26,12 @@ public class LevelManager : MonoBehaviour
         GameManager.Instance.OnStateChange += LevelCompleted;
     }
 
+    private void Start()
+    {
+        _currentLevel = 1;
+        BuildLevel(_currentLevel);
+    }
+
     public void BuildLevel(int level)
     {
         LevelText.text = $"Level {_currentLevel}";
@@ -169,6 +175,10 @@ public class LevelManager : MonoBehaviour
             BuildLevel(_currentLevel);
             // TODO: Load the next level
             // BUG: Will this race for condition in the other events?
+        } else if (newState == GameState.NewGame)
+        {
+            _currentLevel = 1;
+            BuildLevel(_currentLevel);
         }
     }
 
