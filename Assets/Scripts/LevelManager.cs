@@ -31,8 +31,19 @@ public class LevelManager : MonoBehaviour
         SetLevel(1);
     }
 
+    private void ClearLevel()
+    {
+        Debug.Log("Clear existing bricks from level");
+        var bricks = GameObject.FindObjectsOfType<Brick>();
+        foreach (var brick in bricks)
+        {
+            Destroy(brick.gameObject);
+        }
+    }
+
     public void BuildLevel(int level)
     {
+        ClearLevel();
         Debug.Log($"Building Level {level}");
         _brickCount = 0;
         var levelData = GetLevel(level);

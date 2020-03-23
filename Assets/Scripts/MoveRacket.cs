@@ -51,6 +51,6 @@ public class MoveRacket : MonoBehaviour
     private static bool DisallowMovement()
     {
         var gameState = GameManager.Instance.GameState;
-        return gameState == GameState.GameOver || gameState == GameState.Paused;
+        return gameState != GameState.InGame;
     }
 }

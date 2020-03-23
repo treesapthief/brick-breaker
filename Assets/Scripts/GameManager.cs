@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     protected GameManager()
     {
         GameState = GameState.NewGame;
-        LivesManager.Instance.SetLives(LivesManager.Instance.StartingLives);
     }
 
     public void SetGameState(GameState state)
@@ -43,6 +42,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         LevelManager = GetComponent<LevelManager>();
+        LivesManager.Instance.SetLives(LivesManager.Instance.StartingLives);
     }
 
     private void Update()

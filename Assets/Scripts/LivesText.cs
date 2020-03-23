@@ -7,16 +7,19 @@ public class LivesText : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("LivesText.Start");
         _livesText = GetComponent<Text>();
+        LivesManager.Instance.OnLivesChanged += UpdateLivesUI;
     }
 
     private void Awake()
     {
-        LivesManager.Instance.OnLivesChanged += UpdateLivesUI;
+        Debug.Log("LivesText.Awake");
     }
 
     private void UpdateLivesUI(int lives)
     {
+        Debug.Log("LivesText.UpdateLivesUI");
         _livesText.text = $"Lives {lives}";
     }
 }
