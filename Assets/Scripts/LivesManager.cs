@@ -2,7 +2,7 @@
 
 public delegate void OnLivesChangedHandler(int lives);
 
-public class LivesManager : MonoBehaviour
+public class LivesManager
 {
     public event OnLivesChangedHandler OnLivesChanged;
     public int StartingLives = 3;
@@ -10,12 +10,6 @@ public class LivesManager : MonoBehaviour
 
     private int _currentLives;
     private static LivesManager _instance = null;
-
-
-    private void Start()
-    {
-        SetLives(StartingLives);
-    }
 
     public static LivesManager Instance
     {
@@ -30,26 +24,7 @@ public class LivesManager : MonoBehaviour
         }
     }
 
-
-    //private void Awake()
-    //{
-    //    if (Instance == null)
-    //    {
-    //        Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    private void OnApplicationQuit()
-    {
-        _instance = null;
-    }
-
-    private void SetLives(int lives)
+    public void SetLives(int lives)
     {
         _currentLives = lives;
 

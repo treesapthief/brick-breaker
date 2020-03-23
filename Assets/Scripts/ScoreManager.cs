@@ -2,7 +2,7 @@
 
 public delegate void OnScoreChangedHandler(int score);
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager
 {
     public event OnScoreChangedHandler OnScoreChanged;
     
@@ -25,25 +25,6 @@ public class ScoreManager : MonoBehaviour
 
             return _instance;
         }
-    }
-
-
-    //private void Awake()
-    //{
-    //    if (Instance == null)
-    //    {
-    //        Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    private void OnApplicationQuit()
-    {
-        _instance = null;
     }
 
     public void GivePoints(int points)

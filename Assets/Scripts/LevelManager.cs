@@ -34,7 +34,6 @@ public class LevelManager : MonoBehaviour
     public void BuildLevel(int level)
     {
         Debug.Log($"Building Level {level}");
-        //LevelText.text = $"Level {level}";
         _brickCount = 0;
         var levelData = GetLevel(level);
         

@@ -711,9 +711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1105652194}
   - component: {fileID: 1105652193}
-  - component: {fileID: 1105652196}
   - component: {fileID: 1105652195}
-  - component: {fileID: 1105652197}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -766,32 +764,6 @@ MonoBehaviour:
   MaxLevelHeight: 24
   MaxBricks: 120
   NumberOfLevels: 4
---- !u!114 &1105652196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105652192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110f4f1423eef784ea6aa0d7dfae6977, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1105652197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105652192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e76ce98e793d4c25bc3d1d8592269f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingLives: 3
-  MaxLives: 9
 --- !u!1 &1150204303
 GameObject:
   m_ObjectHideFlags: 0
