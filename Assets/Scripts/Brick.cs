@@ -25,8 +25,7 @@ public class Brick : MonoBehaviour
 
     private void TakeDamage()
     {
-        var gameManager = GameManager.Instance;
-        gameManager.ScoreManager.GivePoints(Score);
+        ScoreManager.Instance.GivePoints(Score);
         HitPoints--;
 
         if (HitPoints <= 0)

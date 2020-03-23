@@ -13,7 +13,7 @@ public class Bounds : MonoBehaviour
         if (collision.collider.gameObject.name == "Ball")
         {
             Debug.Log("Point Scored");
-            gameManager.LivesManager.TakeLives(1);
+            LivesManager.Instance.TakeLives(1);
             if (gameManager.GameState == GameState.InGame)
             {
                 gameManager.SetGameState(GameState.WaitForStart);

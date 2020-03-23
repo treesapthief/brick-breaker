@@ -1,73 +1,65 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+
+public delegate void OnScoreChangedHandler(int score);
 
 public class ScoreManager : MonoBehaviour
 {
-    public GameObject PlayerScoreText;
-
+    public event OnScoreChangedHandler OnScoreChanged;
+    
     private int _playerScore;
     private static ScoreManager _instance = null;
 
+
     protected ScoreManager()
     {
-    }
-
-    private void Start()
-    {
-        GameManager.Instance.OnStateChange += LevelCompleted;
-    }
-
-    private void LevelCompleted(GameState newState)
-    {
-        if (newState == GameState.LevelComplete)
-        {
-            // TODO: Save points?
-            // TODO: Calculate bonuses for extra life?
-        }
     }
 
     public static ScoreManager Instance
     {
         get
         {
-            //if (_instance == null)
-            //{
-            //    _instance = new ScoreManager();
-            //}
+            if (_instance == null)
+            {
+                _instance = new ScoreManager();
+            }
 
             return _instance;
         }
     }
 
+
+    //private void Awake()
+    //{
+    //    if (Instance == null)
+    //    {
+    //        Instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    private void OnApplicationQuit()
+    {
+        _instance = null;
+    }
+
     public void GivePoints(int points)
     {
-        _playerScore += points;
-        SetText(_playerScore);
+        SetScore(_playerScore + points);
     }
 
-    private void Awake()
+    private void SetScore(int score)
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
+        _playerScore = score;
+        OnScoreChanged?.Invoke(_playerScore);
     }
-    
 
     public void Reset()
     {
         Debug.Log("ScoreManager.Reset");
-        _playerScore = 0;
-        SetText(_playerScore);
-    }
-
-    private void SetText(int score)
-    {
-        var text = PlayerScoreText.GetComponent<Text>();
-        text.text = score.ToString();
-        // TODO: How do I set this independently? Event when _playerScore changes?
+        SetScore(0);
     }
 }

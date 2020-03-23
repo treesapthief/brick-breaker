@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 113194289}
   - component: {fileID: 113194291}
   - component: {fileID: 113194290}
+  - component: {fileID: 113194292}
   m_Layer: 5
   m_Name: LevelText
   m_TagString: Untagged
@@ -198,6 +199,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113194288}
   m_CullTransparentMesh: 0
+--- !u!114 &113194292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113194288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5277b9ef4afffee4fb71cd59054b81de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &222387446
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +622,7 @@ GameObject:
   - component: {fileID: 1098822153}
   - component: {fileID: 1098822155}
   - component: {fileID: 1098822154}
+  - component: {fileID: 1098822156}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -675,6 +689,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098822152}
   m_CullTransparentMesh: 0
+--- !u!114 &1098822156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098822152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6866e58d5cd0964aabce65b6fc53706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1105652192
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +761,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BrickTemplate: {fileID: 7563375118456347093, guid: f70dff2444be529409f2098f0addc590,
     type: 3}
-  LevelText: {fileID: 113194290}
   Offset: {x: -22, y: 14, z: 0}
   MaxLevelWidth: 48
   MaxLevelHeight: 24
@@ -753,7 +778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110f4f1423eef784ea6aa0d7dfae6977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerScoreText: {fileID: 1098822152}
 --- !u!114 &1105652197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,7 +792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartingLives: 3
   MaxLives: 9
-  LivesText: {fileID: 1560040938}
 --- !u!1 &1150204303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,6 +1283,7 @@ GameObject:
   - component: {fileID: 1560040937}
   - component: {fileID: 1560040939}
   - component: {fileID: 1560040938}
+  - component: {fileID: 1560040940}
   m_Layer: 5
   m_Name: LivesText
   m_TagString: Untagged
@@ -1326,6 +1350,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560040936}
   m_CullTransparentMesh: 0
+--- !u!114 &1560040940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560040936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b42248cf28e7840af6b9cfa5e44fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1891115242
 GameObject:
   m_ObjectHideFlags: 0

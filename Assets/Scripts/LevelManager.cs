@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
+public delegate void OnLevelChangedHandler(int level);
 public class LevelManager : MonoBehaviour
 {
+    public event OnLevelChangedHandler OnLevelChanged;
     public GameObject BrickTemplate;
-    public Text LevelText;
     public Vector3 Offset;
     public int MaxLevelWidth = 45;
     public int MaxLevelHeight = 24;
@@ -19,7 +19,7 @@ public class LevelManager : MonoBehaviour
     {
     }
 
-    public static LevelManager Instance { get; } = null;
+    //public static LevelManager Instance { get; } = null;
 
     private void Awake()
     {
@@ -28,13 +28,13 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        _currentLevel = 1;
-        BuildLevel(_currentLevel);
+        SetLevel(1);
     }
 
     public void BuildLevel(int level)
     {
-        LevelText.text = $"Level {_currentLevel}";
+        Debug.Log($"Building Level {level}");
+        //LevelText.text = $"Level {level}";
         _brickCount = 0;
         var levelData = GetLevel(level);
         
@@ -165,20 +165,11 @@ public class LevelManager : MonoBehaviour
     {
         if (newState == GameState.LevelComplete)
         {
-            _currentLevel++;
-            if (_currentLevel > NumberOfLevels)
-            {
-                _currentLevel = NumberOfLevels;
-            }
-
-            LevelText.text = $"Level {_currentLevel}";
-            BuildLevel(_currentLevel);
-            // TODO: Load the next level
-            // BUG: Will this race for condition in the other events?
-        } else if (newState == GameState.NewGame)
+            SetLevel(_currentLevel + 1);
+        }
+        else if (newState == GameState.NewGame)
         {
-            _currentLevel = 1;
-            BuildLevel(_currentLevel);
+            SetLevel(1);
         }
     }
 
@@ -209,5 +200,17 @@ public class LevelManager : MonoBehaviour
         }
 
         return levelBase;
+    }
+
+    private void SetLevel(int level)
+    {
+        _currentLevel = level;
+        OnLevelChanged?.Invoke(_currentLevel);
+        if (_currentLevel > NumberOfLevels)
+        {
+            _currentLevel = NumberOfLevels;
+        }
+
+        BuildLevel(_currentLevel);
     }
 }

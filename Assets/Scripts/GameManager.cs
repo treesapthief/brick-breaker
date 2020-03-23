@@ -12,13 +12,14 @@ public enum GameState
 
 public delegate void OnStateChangeHandler(GameState newState);
 
+public delegate void OnWaitToStartHandler();
+
 public class GameManager : MonoBehaviour
 {
     public event OnStateChangeHandler OnStateChange;
+    public event OnWaitToStartHandler OnRestartLevel;
     public GameState GameState { get; private set; }
-    public ScoreManager ScoreManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
-    public LivesManager LivesManager { get; private set; }
 
     private static GameManager _instance = null;
 
@@ -27,11 +28,20 @@ public class GameManager : MonoBehaviour
         GameState = GameState.NewGame;
     }
 
+    public void SetGameState(GameState state)
+    {
+        Debug.Log($"GameState changed: {state}");
+        GameState = state;
+        OnStateChange?.Invoke(state);
+        if (GameState == GameState.WaitForStart)
+        {
+            OnRestartLevel?.Invoke();
+        }
+    }
+
     private void Start()
     {
-        ScoreManager = GetComponent<ScoreManager>();
         LevelManager = GetComponent<LevelManager>();
-        LivesManager = GetComponent<LivesManager>();
     }
 
     private void Update()
@@ -64,13 +74,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void SetGameState(GameState state)
-    {
-        Debug.Log($"GameState changed: {state}");
-        GameState = state;
-        OnStateChange?.Invoke(state);
-    }
 
     private void Awake()
     {

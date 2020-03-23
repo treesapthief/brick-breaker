@@ -14,14 +14,20 @@ public class MoveRacket : MonoBehaviour
     {
         _rigidBody2D = GetComponent<Rigidbody2D>();
         GameManager.Instance.OnStateChange += SetRacket;
+        GameManager.Instance.OnRestartLevel += SetRacket;
     }
 
     private void SetRacket(GameState newState)
     {
         if (newState == GameState.NewGame)
         {
-            transform.position = StartingPosition;
+            SetRacket();
         }
+    }
+
+    private void SetRacket()
+    {
+        transform.position = StartingPosition;
     }
 
     // Update is called once per frame
