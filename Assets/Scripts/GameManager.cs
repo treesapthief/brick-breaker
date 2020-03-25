@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("GameManager.Start");
         LevelManager = GetComponent<LevelManager>();
         LivesManager.Instance.SetLives(LivesManager.Instance.StartingLives);
     }
