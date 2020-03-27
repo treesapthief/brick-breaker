@@ -37,8 +37,7 @@ public class Brick : MonoBehaviour
 
     internal void DestroyBrick()
     {
-        var gameManager = GameManager.Instance;
-        gameManager.LevelManager.RemoveBricks(1);
+        LevelManager.Instance.RemoveBricks(1);
         Destroy(gameObject);
     }
 

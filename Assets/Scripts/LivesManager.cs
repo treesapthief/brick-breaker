@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public delegate void OnLivesChangedHandler(int lives);
+﻿public delegate void OnLivesChangedHandler(int lives);
 
 public class LivesManager
 {

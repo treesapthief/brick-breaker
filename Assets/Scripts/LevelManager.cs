@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public delegate void OnLevelChangedHandler(int level);
-public class LevelManager : MonoBehaviour
+
+public class LevelManager
 {
     public event OnLevelChangedHandler OnLevelChanged;
-    public GameObject BrickTemplate;
     public Vector3 Offset;
     public int MaxLevelWidth = 45;
     public int MaxLevelHeight = 24;
@@ -15,29 +16,34 @@ public class LevelManager : MonoBehaviour
     private int _brickCount = 0;
     private int _currentLevel = 1;
 
+    private static LevelManager _instance = null;
+
+    public static LevelManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new LevelManager();
+            }
+
+            return _instance;
+        }
+    }
+
     public LevelManager()
     {
-    }
-
-    //public static LevelManager Instance { get; } = null;
-
-    private void Awake()
-    {
         GameManager.Instance.OnStateChange += LevelCompleted;
-    }
-
-    private void Start()
-    {
-        SetLevel(1);
+        //SetLevel(1);
     }
 
     private void ClearLevel()
     {
         Debug.Log("Clear existing bricks from level");
-        var bricks = GameObject.FindObjectsOfType<Brick>();
+        var bricks = Object.FindObjectsOfType<Brick>();
         foreach (var brick in bricks)
         {
-            Destroy(brick.gameObject);
+            Object.Destroy(brick.gameObject);
         }
     }
 
@@ -84,7 +90,8 @@ public class LevelManager : MonoBehaviour
                 }
 
                 var position = new Vector3(w + Offset.x, Offset.y - h);
-                var brickObject = Instantiate(BrickTemplate, position, Quaternion.identity);
+                var brickTemplate = Resources.Load("Assets/Prefab/Brick");
+                var brickObject = (GameObject)Object.Instantiate(brickTemplate, position, Quaternion.identity);
                 var brick = brickObject.GetComponent<Brick>();
                 if (brick != null)
                 {
@@ -183,13 +190,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private string GetFileNameForLevel(int level)
+    private static string GetFileNameForLevel(int level)
     {
         const string fileBaseName = "level";
         return $"Levels/{fileBaseName}_{level}";
     }
 
-    private string[][] GetLevel(int level)
+    private static string[][] GetLevel(int level)
     {
         var fullFileName = GetFileNameForLevel(level);
         var textAsset = Resources.Load<TextAsset>(fullFileName);
@@ -214,13 +221,14 @@ public class LevelManager : MonoBehaviour
 
     private void SetLevel(int level)
     {
+        Debug.Log($"SetLevel {level}");
         _currentLevel = level;
-        OnLevelChanged?.Invoke(_currentLevel);
         if (_currentLevel > NumberOfLevels)
         {
             _currentLevel = NumberOfLevels;
         }
 
+        OnLevelChanged?.Invoke(_currentLevel);
         BuildLevel(_currentLevel);
     }
 }

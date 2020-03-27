@@ -19,13 +19,12 @@ public class GameManager : MonoBehaviour
     public event OnStateChangeHandler OnStateChange;
     public event OnWaitToStartHandler OnRestartLevel;
     public GameState GameState { get; private set; }
-    public LevelManager LevelManager { get; private set; }
 
     private static GameManager _instance = null;
 
     protected GameManager()
     {
-        GameState = GameState.NewGame;
+        SetGameState(GameState.NewGame);
     }
 
     public void SetGameState(GameState state)
@@ -42,7 +41,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Debug.Log("GameManager.Start");
-        LevelManager = GetComponent<LevelManager>();
         LivesManager.Instance.SetLives(LivesManager.Instance.StartingLives);
     }
 
