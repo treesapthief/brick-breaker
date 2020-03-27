@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     protected GameManager()
     {
-        SetGameState(GameState.NewGame);
+        _instance = this;
     }
 
     public void SetGameState(GameState state)
@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager.Start");
         LivesManager.Instance.SetLives(LivesManager.Instance.StartingLives);
+        SetGameState(GameState.NewGame);
     }
 
     private void Update()

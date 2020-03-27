@@ -8,8 +8,8 @@ public delegate void OnLevelChangedHandler(int level);
 public class LevelManager
 {
     public event OnLevelChangedHandler OnLevelChanged;
-    public Vector3 Offset;
-    public int MaxLevelWidth = 45;
+    public Vector3 Offset = new Vector2(-23, 14);
+    public int MaxLevelWidth = 48;
     public int MaxLevelHeight = 24;
     public int MaxBricks = 120;
     public int NumberOfLevels = 1;
@@ -90,7 +90,7 @@ public class LevelManager
                 }
 
                 var position = new Vector3(w + Offset.x, Offset.y - h);
-                var brickTemplate = Resources.Load("Assets/Prefab/Brick");
+                var brickTemplate = Resources.Load("Prefabs/Brick");
                 var brickObject = (GameObject)Object.Instantiate(brickTemplate, position, Quaternion.identity);
                 var brick = brickObject.GetComponent<Brick>();
                 if (brick != null)
@@ -180,6 +180,7 @@ public class LevelManager
     
     private void LevelCompleted(GameState newState)
     {
+        Debug.Log("LevelManager.LevelCompleted");
         if (newState == GameState.LevelComplete)
         {
             SetLevel(_currentLevel + 1);
@@ -221,13 +222,13 @@ public class LevelManager
 
     private void SetLevel(int level)
     {
-        Debug.Log($"SetLevel {level}");
         _currentLevel = level;
         if (_currentLevel > NumberOfLevels)
         {
             _currentLevel = NumberOfLevels;
         }
 
+        Debug.Log($"OnLevelChanged: {_currentLevel}");
         OnLevelChanged?.Invoke(_currentLevel);
         BuildLevel(_currentLevel);
     }
