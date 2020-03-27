@@ -12,10 +12,10 @@ public class LevelManager
     public int MaxLevelWidth = 48;
     public int MaxLevelHeight = 24;
     public int MaxBricks = 120;
-    public int NumberOfLevels = 1;
+    public int NumberOfLevels = 4;
+
     private int _brickCount = 0;
     private int _currentLevel = 1;
-
     private static LevelManager _instance = null;
 
     public static LevelManager Instance
@@ -34,7 +34,6 @@ public class LevelManager
     public LevelManager()
     {
         GameManager.Instance.OnStateChange += LevelCompleted;
-        //SetLevel(1);
     }
 
     private void ClearLevel()

@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         {
             SetGameState(GameState.NewGame);
             ScoreManager.Instance.Reset();
+            LivesManager.Instance.SetLives(LivesManager.Instance.StartingLives);
         }
     }
 
